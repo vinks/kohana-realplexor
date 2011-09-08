@@ -20,8 +20,6 @@ class Kohana_Realplexor {
 			// Load the configuration for this type
 			$config = Kohana::$config->load('realplexor')->get($group);
 				
-			Fire_Helper::log($config, 'Config');
-				
 			// Create a new realplexor instance
 			Realplexor::$_instance = new Realplexor($config);
 		}
