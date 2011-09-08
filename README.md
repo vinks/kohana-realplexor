@@ -1,8 +1,8 @@
 ## What is it?
-The Kohana 3.2 api library for [Dklab Realplexor](http://dklab.ru/lib/dklab_realplexor): Comet server by Dmitry Koterov, dkLab (C) which handles 1000000+ parallel browser connections.
+The Kohana 3.2 api library for [Dklab Realplexor](https://github.com/DmitryKoterov/dklab_realplexor): Comet server by Dmitry Koterov, dkLab (C) which handles 1000000+ parallel browser connections.
 
 ## Configuration
- 1. Install [Dklab Realplexor](http://dklab.ru/lib/dklab_realplexor)
+ 1. Install [Dklab Realplexor](https://github.com/DmitryKoterov/dklab_realplexor)
  1. Plug-in kohana-realplexor module in bootstrap.php
  2. Tune *config/realplexor.php* default connection profile for your needs
  3. *Realplexor::instance()* returns realplexor api object with default profile. Certainly you can use an arbitrary profile name 'some-profile-name', that case use *Realplexor::instance('some-profile-name')*
