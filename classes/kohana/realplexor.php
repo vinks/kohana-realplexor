@@ -20,6 +20,8 @@ class Kohana_Realplexor {
 			// Load the configuration for this type
 			$config = Kohana::$config->load('realplexor')->get($group);
 				
+			Fire_Helper::log($config, 'Config');
+				
 			// Create a new realplexor instance
 			Realplexor::$_instance = new Realplexor($config);
 		}
@@ -29,7 +31,8 @@ class Kohana_Realplexor {
 
 	/**
 	 * Loads configuration options.
-	 *
+	 * 
+	 * @param array $config
 	 * @return  void
 	 */
 	public function __construct($config = array())
@@ -49,7 +52,6 @@ class Kohana_Realplexor {
 	 * This method does not check credentials correctness.
 	 *
 	 * @param string $login
-	 * @param string $password
 	 * @return void
 	 */
 	public function logon($login)
@@ -69,14 +71,14 @@ class Kohana_Realplexor {
 	 * ~~~ Send data limiting receivers.
 	 * Realplexor::instance()->send("Alpha", "any data", array($id1, $id2, ...));
 	 *
-	 * @param mixed $ids		Target IDs in form of: array(id1 => cursor1, id2 => cursor2, ...)
-	 *								of array(id1, id2, id3, ...). If sending to a single ID,
-	 *								you may pass it as a plain string, not array.
-	 * @param mixed $data		Data to be sent (any format, e.g. nested arrays are OK).
-	 * @param array $showonly	Send this message to only those who also listen any of these IDs.
-	 *								This parameter may be used to limit the visibility to a closed
-	 *								number of cliens: give each client an unique ID and enumerate
-	 *								client IDs in $showonly to not to send messages to others.
+	 * @param mixed $ids        Target IDs in form of: array(id1 => cursor1, id2 => cursor2, ...)
+	 *                           of array(id1, id2, id3, ...). If sending to a single ID,
+	 *                           you may pass it as a plain string, not array.
+	 * @param mixed $data       Data to be sent (any format, e.g. nested arrays are OK).
+	 * @param array $showonly   Send this message to only those who also listen any of these IDs.
+	 *                           This parameter may be used to limit the visibility to a closed
+	 *                           number of cliens: give each client an unique ID and enumerate
+	 *                           client IDs in $showonly to not to send messages to others.
 	 * @return void
 	 */
 	public function send($ids, $data, $showonly = null)
@@ -125,7 +127,7 @@ class Kohana_Realplexor {
 	 * very approximate; more precision is in TODO.)
 	 *
 	 * @param array $prefixes   If set, only online IDs with these prefixes are returned.
-	 * @return array              List of matched online IDs (keys) and online counters (values).
+	 * @return array            List of matched online IDs (keys) and online counters (values).
 	 */
 	public function onlinecounters($prefixes = null)
 	{
@@ -174,8 +176,8 @@ class Kohana_Realplexor {
 	 * ~~~ Get the list of online channels which names are started with "id_" only. 
 	 * $list = Realplexor::instance()->(array('id_'));
 	 *
-	 * @param array $prefixes	If set, only online IDs with these prefixes are returned.
-	 * @return array			List of matched online IDs.
+	 * @param array $prefixes   If set, only online IDs with these prefixes are returned.
+	 * @return array            List of matched online IDs.
 	 */
 	public function online($prefixes = null)
 	{
@@ -186,9 +188,9 @@ class Kohana_Realplexor {
 	 * Return all Realplexor events (e.g. ID offline/offline changes)
 	 * happened after $from cursor.
 	 *
-	 * @param string $from		Start watching from this cursor.
-	 * @param array $prefixes	Watch only changes of IDs with these prefixes.
-	 * @return array			List of array("event" => ..., "cursor" => ..., "id" => ...).
+	 * @param string $from      Start watching from this cursor.
+	 * @param array $prefixes   Watch only changes of IDs with these prefixes.
+	 * @return array            List of array("event" => ..., "cursor" => ..., "id" => ...).
 	 */
 	public function watch($from = 0, $prefixes = null)
 	{
@@ -258,7 +260,7 @@ class Kohana_Realplexor {
 	 * Throw Exception in case of error.
 	 *
 	 * @param string $identifier  If set, pass this identifier string.
-	 * @param string $data        Data to be sent.
+	 * @param string $body        Data to be sent.
 	 * @return string             Response from IN line.
 	 */
 	private function _send($identifier, $body)
